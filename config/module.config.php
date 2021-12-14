@@ -1,8 +1,7 @@
 <?php
 namespace AsyncQueue;
 
-use AsyncQueue\Action\Process;
-use Common\Router\ConsoleRouteCreator;
+use AsyncQueue\Command\Process as Process;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Ramsey\Uuid\Doctrine\UuidType;
 
@@ -24,7 +23,7 @@ return [
 			'async_queue_entities' => [
 				'class' => AnnotationDriver::class,
 				'cache' => 'array',
-				'paths' => [__DIR__ . '/../src'],
+				'paths' => [ __DIR__ . '/../src' ],
 			],
 			'orm_default'          => [
 				'drivers' => [
@@ -35,14 +34,9 @@ return [
 	],
 
 	'console' => [
-		'router' => [
-			'routes' => [
-				'async-queue-process' => ConsoleRouteCreator::create()
-					->setRoute('async-queue process')
-					->setAction(Process::class)
-					->getConfig()
-			],
-		]
+		'commands' => [
+			Process::class,
+		],
 	],
 
 	'service_manager' => [
@@ -53,7 +47,7 @@ return [
 
 	'controllers' => [
 		'abstract_factories' => [
-			DefaultFactory::class
+			DefaultFactory::class,
 		],
 	],
 ];
