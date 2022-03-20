@@ -8,14 +8,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Process extends Command
 {
-	/**
-	 * @var Processor
-	 */
-	private $processor;
+	private Processor $processor;
 
-	/**
-	 * @param Processor $processor
-	 */
 	public function __construct(Processor $processor)
 	{
 		$this->processor = $processor;

@@ -1,10 +1,11 @@
 <?php
 namespace AsyncQueue\Item;
 
-use Common\Db\EntityRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class RepositoryFactory implements FactoryInterface
 {
@@ -12,9 +13,11 @@ class RepositoryFactory implements FactoryInterface
 	 * @param ContainerInterface $container
 	 * @param string $requestedName
 	 * @param array|null $options
-	 * @return EntityRepository
+	 * @return Repository
+	 * @throws ContainerExceptionInterface
+	 * @throws NotFoundExceptionInterface
 	 */
-	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+	public function __invoke(ContainerInterface $container, $requestedName, array $options = null): object
 	{
 		return $container
 			->get(EntityManager::class)

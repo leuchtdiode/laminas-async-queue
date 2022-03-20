@@ -13,36 +13,20 @@ use Common\Db\FilterChain;
 use Common\Db\OrderChain;
 use DateTime;
 use Exception;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class Processor
 {
-	/**
-	 * @var array
-	 */
-	private $config;
+	private array $config;
 
-	/**
-	 * @var ContainerInterface
-	 */
-	private $container;
+	private ContainerInterface $container;
 
-	/**
-	 * @var Provider
-	 */
-	private $itemProvider;
+	private Provider $itemProvider;
 
-	/**
-	 * @var EntitySaver
-	 */
-	private $entitySaver;
+	private EntitySaver $entitySaver;
 
-	/**
-	 * @param array $config
-	 * @param ContainerInterface $container
-	 * @param Provider $itemProvider
-	 * @param EntitySaver $entitySaver
-	 */
 	public function __construct(
 		array $config,
 		ContainerInterface $container,
@@ -57,9 +41,10 @@ class Processor
 	}
 
 	/**
-	 * @throws Exception
+	 * @throws ContainerExceptionInterface
+	 * @throws NotFoundExceptionInterface
 	 */
-	public function process()
+	public function process(): void
 	{
 		$now = new DateTime();
 

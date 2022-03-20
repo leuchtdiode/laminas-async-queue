@@ -2,7 +2,7 @@
 namespace AsyncQueue;
 
 use AsyncQueue\Command\Process as Process;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Ramsey\Uuid\Doctrine\UuidType;
 
 return [
@@ -21,7 +21,7 @@ return [
 		],
 		'driver'        => [
 			'async_queue_entities' => [
-				'class' => AnnotationDriver::class,
+				'class' => AttributeDriver::class,
 				'cache' => 'array',
 				'paths' => [ __DIR__ . '/../src' ],
 			],

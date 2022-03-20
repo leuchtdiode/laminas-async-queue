@@ -8,24 +8,14 @@ use Exception;
 
 class Adder
 {
-	/**
-	 * @var EntitySaver
-	 */
-	private $entitySaver;
+	private EntitySaver $entitySaver;
 
-	/**
-	 * @param EntitySaver $entitySaver
-	 */
 	public function __construct(EntitySaver $entitySaver)
 	{
 		$this->entitySaver = $entitySaver;
 	}
 
-	/**
-	 * @param AddData $data
-	 * @throws Exception
-	 */
-	public function add(AddData $data)
+	public function add(AddData $data): void
 	{
 		$entity = new Entity();
 		$entity->setType($data->getType());

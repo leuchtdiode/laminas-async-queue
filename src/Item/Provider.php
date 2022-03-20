@@ -6,20 +6,10 @@ use Common\Db\OrderChain;
 
 class Provider
 {
-	/**
-	 * @var Repository
-	 */
-	private $repository;
+	private Repository $repository;
 
-	/**
-	 * @var Creator
-	 */
-	private $creator;
+	private Creator $creator;
 
-	/**
-	 * @param Repository $repository
-	 * @param Creator $creator
-	 */
 	public function __construct(Repository $repository, Creator $creator)
 	{
 		$this->repository = $repository;
@@ -27,11 +17,9 @@ class Provider
 	}
 
 	/**
-	 * @param FilterChain $filterChain
-	 * @param OrderChain|null $orderChain
 	 * @return Item[]
 	 */
-	public function filter(FilterChain $filterChain, ?OrderChain $orderChain = null)
+	public function filter(FilterChain $filterChain, ?OrderChain $orderChain = null): array
 	{
 		return $this->createDtos(
 			$this->repository->filter($filterChain, $orderChain)
@@ -42,7 +30,7 @@ class Provider
 	 * @param Entity[] $entities
 	 * @return Item[]
 	 */
-	private function createDtos(array $entities)
+	private function createDtos(array $entities): array
 	{
 		return array_map(
 			function (Entity $entity)
@@ -53,11 +41,7 @@ class Provider
 		);
 	}
 
-	/**
-	 * @param Entity $entity
-	 * @return Item
-	 */
-	private function createDto(Entity $entity)
+	private function createDto(Entity $entity): Item
 	{
 		return $this->creator->byEntity($entity);
 	}
