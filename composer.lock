@@ -3218,16 +3218,16 @@
         },
         {
             "name": "leuchtdiode/laminas-common",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leuchtdiode/laminas-common.git",
-                "reference": "72fd37373293a1858bb6e56601001fa9fc2af75f"
+                "reference": "ee42b89ec54570c48719f2174d832ed2a8a225e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leuchtdiode/laminas-common/zipball/72fd37373293a1858bb6e56601001fa9fc2af75f",
-                "reference": "72fd37373293a1858bb6e56601001fa9fc2af75f",
+                "url": "https://api.github.com/repos/leuchtdiode/laminas-common/zipball/ee42b89ec54570c48719f2174d832ed2a8a225e7",
+                "reference": "ee42b89ec54570c48719f2174d832ed2a8a225e7",
                 "shasum": ""
             },
             "require": {
@@ -3273,9 +3273,9 @@
             ],
             "support": {
                 "issues": "https://github.com/leuchtdiode/laminas-common/issues",
-                "source": "https://github.com/leuchtdiode/laminas-common/tree/2.1.0"
+                "source": "https://github.com/leuchtdiode/laminas-common/tree/2.1.1"
             },
-            "time": "2022-03-20T11:56:18+00:00"
+            "time": "2022-03-20T19:38:02+00:00"
         },
         {
             "name": "leuchtdiode/laminas-console",
