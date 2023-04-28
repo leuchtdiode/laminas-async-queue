@@ -4,17 +4,19 @@ namespace AsyncQueue\Queue;
 use AsyncQueue\Item\Entity;
 use AsyncQueue\Item\EntitySaver;
 use DateTime;
-use Exception;
+use Throwable;
 
 class Adder
 {
-	private EntitySaver $entitySaver;
-
-	public function __construct(EntitySaver $entitySaver)
+	public function __construct(
+		private readonly EntitySaver $entitySaver
+	)
 	{
-		$this->entitySaver = $entitySaver;
 	}
 
+	/**
+	 * @throws Throwable
+	 */
 	public function add(AddData $data): void
 	{
 		$entity = new Entity();

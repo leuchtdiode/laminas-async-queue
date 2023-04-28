@@ -13,36 +13,22 @@ use Common\Db\FilterChain;
 use Common\Db\OrderChain;
 use DateTime;
 use Exception;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
+use Throwable;
 
 class Processor
 {
-	private array $config;
-
-	private ContainerInterface $container;
-
-	private Provider $itemProvider;
-
-	private EntitySaver $entitySaver;
-
 	public function __construct(
-		array $config,
-		ContainerInterface $container,
-		Provider $itemProvider,
-		EntitySaver $entitySaver
+		private readonly array $config,
+		private readonly ContainerInterface $container,
+		private readonly Provider $itemProvider,
+		private readonly EntitySaver $entitySaver
 	)
 	{
-		$this->config       = $config;
-		$this->container    = $container;
-		$this->itemProvider = $itemProvider;
-		$this->entitySaver  = $entitySaver;
 	}
 
 	/**
-	 * @throws ContainerExceptionInterface
-	 * @throws NotFoundExceptionInterface
+	 * @throws Throwable
 	 */
 	public function process(): void
 	{
@@ -83,17 +69,22 @@ class Processor
 			if (($success = $processResult->isSuccess()) !== null)
 			{
 				$entity->setStatus(
-					$success ? Status::SUCCESS : Status::FAILED
+					$success
+						? Status::SUCCESS
+						: Status::FAILED
 				);
 			}
-			else if (($retryInSeconds = $processResult->getRetryInSeconds()))
+			else
 			{
-				$processAfter = new DateTime();
-				$processAfter->modify('+ ' . $retryInSeconds . ' seconds');
+				if (($retryInSeconds = $processResult->getRetryInSeconds()))
+				{
+					$processAfter = new DateTime();
+					$processAfter->modify('+ ' . $retryInSeconds . ' seconds');
 
-				$entity->setProcessAfter(
-					$processAfter
-				);
+					$entity->setProcessAfter(
+						$processAfter
+					);
+				}
 			}
 
 			$this->entitySaver->save($entity);

@@ -6,14 +6,11 @@ use Common\Db\OrderChain;
 
 class Provider
 {
-	private Repository $repository;
-
-	private Creator $creator;
-
-	public function __construct(Repository $repository, Creator $creator)
+	public function __construct(
+		private readonly Repository $repository,
+		private readonly Creator $creator
+	)
 	{
-		$this->repository = $repository;
-		$this->creator    = $creator;
 	}
 
 	/**
