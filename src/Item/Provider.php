@@ -14,6 +14,13 @@ class Provider
 	{
 	}
 
+	public function byId(string $id): ?Item
+	{
+		return ($entity = $this->repository->find($id))
+			? $this->createDto($entity)
+			: null;
+	}
+
 	/**
 	 * @return Item[]
 	 */

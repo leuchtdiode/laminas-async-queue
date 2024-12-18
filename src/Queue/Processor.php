@@ -66,6 +66,11 @@ class Processor
 				new ProcessData($item->getPayLoad())
 			);
 
+			// reload, maybe the source system cleared the entity manager during processing
+			$entity = $this->itemProvider
+				->byId($entity->getId())
+				->getEntity();
+
 			if (($success = $processResult->isSuccess()) !== null)
 			{
 				$entity->setStatus(
