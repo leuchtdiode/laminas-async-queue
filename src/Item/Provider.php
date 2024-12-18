@@ -3,6 +3,7 @@ namespace AsyncQueue\Item;
 
 use Common\Db\FilterChain;
 use Common\Db\OrderChain;
+use Throwable;
 
 class Provider
 {
@@ -21,6 +22,14 @@ class Provider
 		return $this->createDtos(
 			$this->repository->filter($filterChain, $orderChain)
 		);
+	}
+
+	/**
+	 * @throws Throwable
+	 */
+	public function countWithFilter(FilterChain $filterChain): int
+	{
+		return $this->repository->countWithFilter($filterChain);
 	}
 
 	/**

@@ -5,11 +5,10 @@ use DateTime;
 
 class AddData
 {
-	private string $type;
-
-	private array $payLoad;
-
-	private ?DateTime $processAfter = null;
+	private string    $type;
+	private array     $payLoad;
+	private ?DateTime $processAfter        = null;
+	private bool      $addOnlyIfNotInQueue = false;
 
 	public static function create(): self
 	{
@@ -46,6 +45,17 @@ class AddData
 	public function setProcessAfter(?DateTime $processAfter): AddData
 	{
 		$this->processAfter = $processAfter;
+		return $this;
+	}
+
+	public function isAddOnlyIfNotInQueue(): bool
+	{
+		return $this->addOnlyIfNotInQueue;
+	}
+
+	public function setAddOnlyIfNotInQueue(bool $addOnlyIfNotInQueue): AddData
+	{
+		$this->addOnlyIfNotInQueue = $addOnlyIfNotInQueue;
 		return $this;
 	}
 }
