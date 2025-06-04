@@ -45,6 +45,14 @@ class Processor
 		foreach ($items as $item)
 		{
 			$entity = $item->getEntity();
+			$entity->setStatus(Status::PROCESSING);
+
+			$this->entitySaver->save($entity);
+		}
+
+		foreach ($items as $item)
+		{
+			$entity = $item->getEntity();
 
 			$type = $item->getType();
 

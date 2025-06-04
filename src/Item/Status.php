@@ -3,7 +3,8 @@ namespace AsyncQueue\Item;
 
 class Status
 {
-	const PENDING = 'pending';
-	const FAILED  = 'failed';
-	const SUCCESS = 'success';
+	const PENDING    = 'pending';
+	const PROCESSING = 'processing';
+	const FAILED     = 'failed';
+	const SUCCESS    = 'success';
 }
